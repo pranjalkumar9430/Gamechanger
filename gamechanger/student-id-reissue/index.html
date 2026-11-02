@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LPU Student ID Card Reissue Portal</title>
+  <meta name="description" content="Lovely Professional University Student ID Card Replacement and Reissue Portal. Apply for a new ID card, track your application status, and more." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <!-- Logo area -->
+      <div class="logo-area">
+        <img src="lpu-logo.jpg" alt="Lovely Professional University Logo" class="lpu-logo-img" />
+        <div class="header-titles">
+          <h1 class="university-name">Lovely Professional University</h1>
+          <p class="portal-subtitle">Student ID Card Replacement &amp; Reissue Portal</p>
+        </div>
+      </div>
+      <!-- Mobile menu toggle -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ===== NAVIGATION BAR ===== -->
+  <nav class="main-nav" id="mainNav">
+    <ul class="nav-list">
+      <li><a href="#dashboard"   class="nav-link active" data-section="dashboard">Dashboard</a></li>
+      <li><a href="#apply"       class="nav-link"        data-section="apply">Apply for Reissue</a></li>
+      <li><a href="#track"       class="nav-link"        data-section="track">Track Application</a></li>
+
+    </ul>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- ========== SECTION: DASHBOARD ========== -->
+    <section id="dashboard" class="section active-section">
+
+      <div class="welcome-banner">
+        <h2>Welcome to LPU ID Card Reissue Portal</h2>
+        <p>This portal allows Lovely Professional University students to apply for a replacement or reissue of their Student Identity Card. Please keep your Roll Number and required documents ready before applying.</p>
+      </div>
+
+      <!-- Info cards row -->
+      <div class="info-cards">
+        <div class="info-card">
+          <h3>&#128196; What You Can Do</h3>
+          <ul>
+            <li>Apply for ID card reissue (Lost / Damaged / Defaced)</li>
+            <li>Upload required document checklist</li>
+            <li>Choose Standard or Urgent processing</li>
+            <li>Track your application status in real time</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>&#128203; Required Documents</h3>
+          <ul>
+            <li><strong>Lost:</strong> Police Lost Report Acknowledgment</li>
+            <li><strong>Damaged:</strong> Old Damaged Card Submission</li>
+            <li><strong>Defaced:</strong> Old Damaged Card Submission</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>&#128181; Processing Fees (Demo)</h3>
+          <ul>
+            <li>Standard Reissue &#8212; &#8377;200</li>
+            <li>Urgent 24-Hour Processing &#8212; &#8377;500</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Application status card (shown after submission) -->
+      <div class="status-card" id="dashboardStatusCard" style="display:none;">
+        <h3>&#128203; Your Last Application</h3>
+        <div id="dashboardStatusContent"></div>
+        <button class="btn-red" onclick="showSection('track')">Track Application</button>
+      </div>
+
+      <!-- Quick action buttons -->
+      <div class="quick-actions">
+        <button class="btn-red" onclick="showSection('apply')">Apply for Reissue</button>
+        <button class="btn-outline" onclick="showSection('track')">Track Application</button>
+      </div>
+
+    </section>
+
+    <!-- ========== SECTION: APPLY FOR REISSUE ========== -->
+    <section id="apply" class="section">
+
+      <h2 class="section-title">Apply for ID Card Reissue</h2>
+
+      <!-- Success message (shown after submission) -->
+      <div id="successMessage" class="success-box" style="display:none;">
+        <h3>&#9989; Application Submitted Successfully!</h3>
+        <div id="successDetails"></div>
+        <button class="btn-red" onclick="showSection('track')">Track Your Application</button>
+        <button class="btn-outline" onclick="resetForm()">Submit Another Application</button>
+      </div>
+
+      <!-- THE FORM -->
+      <form id="reissueForm" class="reissue-form" novalidate>
+
+        <!-- Student Details -->
+        <fieldset>
+          <legend>Student Details</legend>
+
+          <div class="form-group">
+            <label for="rollNumber">Roll Number <span class="required">*</span></label>
+            <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g. 12306802" maxlength="20" />
+            <span class="error-msg" id="rollNumberError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Full Name <span class="required">*</span></label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" maxlength="100" />
+            <span class="error-msg" id="fullNameError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="branch">Branch / Programme <span class="required">*</span></label>
+            <select id="branch" name="branch">
+              <option value="">-- Select Branch --</option>
+              <option value="B.Tech - Computer Science">B.Tech - Computer Science</option>
+              <option value="B.Tech - Mechanical Engineering">B.Tech - Mechanical Engineering</option>
+              <option value="B.Tech - Civil Engineering">B.Tech - Civil Engineering</option>
+              <option value="B.Tech - Electronics and Communication">B.Tech - Electronics and Communication</option>
+              <option value="BCA">BCA</option>
+              <option value="BBA">BBA</option>
+              <option value="MBA">MBA</option>
+              <option value="MCA">MCA</option>
+              <option value="B.Com">B.Com</option>
+              <option value="B.Sc">B.Sc</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="error-msg" id="branchError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="bloodGroup">Blood Group <span class="required">*</span></label>
+            <select id="bloodGroup" name="bloodGroup">
+              <option value="">-- Select Blood Group --</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+            <span class="error-msg" id="bloodGroupError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="reason">Reason for Reissue <span class="required">*</span></label>
+            <select id="reason" name="reason" onchange="updateChecklist()">
+              <option value="">-- Select Reason --</option>
+              <option value="Lost">Lost</option>
+              <option value="Damaged">Damaged</option>
+              <option value="Defaced">Defaced</option>
+            </select>
+            <span class="error-msg" id="reasonError"></span>
+          </div>
+
+        </fieldset>
+
+        <!-- Document Checklist -->
+        <fieldset id="checklistFieldset" style="display:none;">
+          <legend>Document Checklist</legend>
+          <p class="checklist-note">Please confirm that you have the following documents ready for submission at the office:</p>
+
+          <div class="checklist-item" id="checklistPolice" style="display:none;">
+            <label class="checkbox-label">
+              <input type="checkbox" id="chkPolice" />
+              Police Lost Report Acknowledgment <span class="required">*</span>
+            </label>
+          </div>
+
+          <div class="checklist-item" id="checklistOldCard" style="display:none;">
+            <label class="checkbox-label">
+              <input type="checkbox" id="chkOldCard" />
+              Old Damaged / Defaced Card Submission <span class="required">*</span>
+            </label>
+          </div>
+
+          <span class="error-msg" id="checklistError"></span>
+        </fieldset>
+
+        <!-- Fee Calculator -->
+        <fieldset>
+          <legend>Processing Option and Fee</legend>
+
+          <div class="form-group">
+            <label>
+              <input type="radio" name="processingType" value="Standard" checked onchange="updateFee()" />
+              Standard Reissue &#8212; &#8377;200 (7 to 10 working days)
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="radio" name="processingType" value="Urgent" onchange="updateFee()" />
+              Urgent 24-Hour Processing &#8212; &#8377;500
+            </label>
+          </div>
+
+          <!-- Fee summary -->
+          <div class="fee-summary" id="feeSummary">
+            <table class="fee-table">
+              <tr>
+                <td>Processing Type</td>
+                <td id="feeType">Standard Reissue</td>
+              </tr>
+              <tr>
+                <td>Processing Fee</td>
+                <td id="feeAmount">&#8377;200</td>
+              </tr>
+              <tr class="fee-total">
+                <td><strong>Total Amount Payable</strong></td>
+                <td id="feeTotal"><strong>&#8377;200</strong></td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+
+        <!-- Submit button -->
+        <div class="form-submit">
+          <button type="submit" class="btn-red btn-large" id="submitBtn">Submit Application</button>
+        </div>
+
+      </form>
+
+    </section>
+
+    <!-- ========== SECTION: TRACK APPLICATION ========== -->
+    <section id="track" class="section">
+
+      <h2 class="section-title">Track Your Application</h2>
+
+      <!-- No application notice -->
+      <div id="noApplicationNotice" class="info-box">
+        <p>&#8505; No application found. Please <a href="#apply" onclick="showSection('apply')">apply for reissue</a> first.</p>
+      </div>
+
+      <!-- Tracking content (shown after an application is submitted) -->
+      <div id="trackingContent" style="display:none;">
+
+        <div class="tracking-header">
+          <p><strong>Application ID:</strong> <span id="trackAppId" class="highlight-red"></span></p>
+          <p><strong>Applicant Name:</strong> <span id="trackName"></span></p>
+          <p><strong>Roll Number:</strong> <span id="trackRoll"></span></p>
+          <p><strong>Reason:</strong> <span id="trackReason"></span></p>
+          <p><strong>Processing Type:</strong> <span id="trackProcessing"></span></p>
+          <p><strong>Total Fee:</strong> <span id="trackFee"></span></p>
+        </div>
+
+        <!-- Status Timeline -->
+        <h3 class="timeline-heading">Application Status Timeline</h3>
+        <div class="timeline" id="statusTimeline">
+          <div class="timeline-step" id="step-0">
+            <div class="step-circle">1</div>
+            <div class="step-label">Submitted</div>
+          </div>
+          <div class="timeline-connector" id="conn-0"></div>
+          <div class="timeline-step" id="step-1">
+            <div class="step-circle">2</div>
+            <div class="step-label">Payment Verified</div>
+          </div>
+          <div class="timeline-connector" id="conn-1"></div>
+          <div class="timeline-step" id="step-2">
+            <div class="step-circle">3</div>
+            <div class="step-label">Printing</div>
+          </div>
+          <div class="timeline-connector" id="conn-2"></div>
+          <div class="timeline-step" id="step-3">
+            <div class="step-circle">4</div>
+            <div class="step-label">Ready for Collection</div>
+          </div>
+        </div>
+
+        <!-- Demo status changer -->
+        <div class="status-changer">
+          <label for="statusSelect"><strong>Change Status to See Timeline Update</strong></label>
+          <br />
+          <select id="statusSelect" onchange="updateStatus()">
+            <option value="0">Submitted</option>
+            <option value="1">Payment Verified</option>
+            <option value="2">Printing</option>
+            <option value="3">Ready for Collection</option>
+          </select>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <p>Lovely Professional University &mdash; Student ID Card Reissue Portal</p>
+    <p class="footer-note">Student Project | Frontend Demonstration</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
