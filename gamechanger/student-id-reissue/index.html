@@ -1,143 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LPU Student ID Card Reissue Portal</title>
-  <meta name="description" content="Lovely Professional University Student ID Card Replacement and Reissue Portal. Apply for a new ID card, track your application status, and more." />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
   <header class="site-header">
-    <div class="header-inner">
-      <!-- Logo area -->
-      <div class="logo-area">
-        <img src="lpu-logo.jpg" alt="Lovely Professional University Logo" class="lpu-logo-img" />
-        <div class="header-titles">
-          <h1 class="university-name">Lovely Professional University</h1>
-          <p class="portal-subtitle">Student ID Card Replacement &amp; Reissue Portal</p>
-        </div>
+    <div class="header-container">
+      <div class="logo-box">
+        <img src="lpu-logo.jpg" alt="LPU Logo" class="lpu-logo">
       </div>
-      <!-- Mobile menu toggle -->
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">&#9776;</button>
+      <div class="title-box">
+        <h1>Lovely Professional University</h1>
+        <p class="subtitle">Student ID Card Replacement &amp; Reissue Portal</p>
+      </div>
     </div>
   </header>
 
-  <!-- ===== NAVIGATION BAR ===== -->
-  <nav class="main-nav" id="mainNav">
-    <ul class="nav-list">
-      <li><a href="#dashboard"   class="nav-link active" data-section="dashboard">Dashboard</a></li>
-      <li><a href="#apply"       class="nav-link"        data-section="apply">Apply for Reissue</a></li>
-      <li><a href="#track"       class="nav-link"        data-section="track">Track Application</a></li>
-
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a href="#instructions">Instructions</a></li>
+      <li><a href="#apply">Apply Reissue</a></li>
+      <li><a href="#fee-structure">Fee Structure</a></li>
+      <li><a href="#contact">Contact Support</a></li>
     </ul>
   </nav>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <main class="main-content">
+  <main class="main-container">
 
-    <!-- ========== SECTION: DASHBOARD ========== -->
-    <section id="dashboard" class="section active-section">
+    <section id="instructions" class="card">
+      <h2>General Instructions &amp; Guidelines</h2>
+      <p class="intro-text">
+        Welcome to the <strong>LPU Student ID Card Reissue Portal</strong>. This portal is for students of Lovely Professional University who need a replacement ID Card due to loss, damage, or defacement.
+      </p>
 
-      <div class="welcome-banner">
-        <h2>Welcome to LPU ID Card Reissue Portal</h2>
-        <p>This portal allows Lovely Professional University students to apply for a replacement or reissue of their Student Identity Card. Please keep your Roll Number and required documents ready before applying.</p>
-      </div>
-
-      <!-- Info cards row -->
-      <div class="info-cards">
-        <div class="info-card">
-          <h3>&#128196; What You Can Do</h3>
+      <div class="info-grid">
+        <div class="info-box">
+          <h3>1. Reasons for Reissue</h3>
           <ul>
-            <li>Apply for ID card reissue (Lost / Damaged / Defaced)</li>
-            <li>Upload required document checklist</li>
-            <li>Choose Standard or Urgent processing</li>
-            <li>Track your application status in real time</li>
+            <li><strong>Lost Card:</strong> ID card is missing or stolen.</li>
+            <li><strong>Damaged Card:</strong> Card is physically broken or barcode is unreadable.</li>
+            <li><strong>Defaced Card:</strong> Photo or text has faded over time.</li>
           </ul>
         </div>
-        <div class="info-card">
-          <h3>&#128203; Required Documents</h3>
+
+        <div class="info-box">
+          <h3>2. Required Documents</h3>
           <ul>
-            <li><strong>Lost:</strong> Police Lost Report Acknowledgment</li>
-            <li><strong>Damaged:</strong> Old Damaged Card Submission</li>
-            <li><strong>Defaced:</strong> Old Damaged Card Submission</li>
+            <li><strong>Lost:</strong> Police Complaint / DDR copy acknowledgment.</li>
+            <li><strong>Damaged/Defaced:</strong> Original old ID card must be submitted.</li>
+            <li><strong>All:</strong> Valid Student Registration / Roll Number.</li>
           </ul>
         </div>
-        <div class="info-card">
-          <h3>&#128181; Processing Fees (Demo)</h3>
+
+        <div class="info-box">
+          <h3>3. Collection Process</h3>
           <ul>
-            <li>Standard Reissue &#8212; &#8377;200</li>
-            <li>Urgent 24-Hour Processing &#8212; &#8377;500</li>
+            <li>Standard processing takes <strong>7 to 10 working days</strong>.</li>
+            <li>Urgent processing is completed within <strong>24 to 48 hours</strong>.</li>
+            <li>Collect the card from <strong>Block 30 (Division of Student Welfare)</strong>.</li>
           </ul>
         </div>
       </div>
-
-      <!-- Application status card (shown after submission) -->
-      <div class="status-card" id="dashboardStatusCard" style="display:none;">
-        <h3>&#128203; Your Last Application</h3>
-        <div id="dashboardStatusContent"></div>
-        <button class="btn-red" onclick="showSection('track')">Track Application</button>
-      </div>
-
-      <!-- Quick action buttons -->
-      <div class="quick-actions">
-        <button class="btn-red" onclick="showSection('apply')">Apply for Reissue</button>
-        <button class="btn-outline" onclick="showSection('track')">Track Application</button>
-      </div>
-
     </section>
 
-    <!-- ========== SECTION: APPLY FOR REISSUE ========== -->
-    <section id="apply" class="section">
+    <section id="apply" class="card">
+      <h2>Apply for ID Card Reissue</h2>
+      <p class="form-instruction">Please fill in all the required details carefully. Fields marked with <span class="required">*</span> are mandatory.</p>
 
-      <h2 class="section-title">Apply for ID Card Reissue</h2>
+      <form id="reissueForm" onsubmit="return handleFormSubmit(event)">
 
-      <!-- Success message (shown after submission) -->
-      <div id="successMessage" class="success-box" style="display:none;">
-        <h3>&#9989; Application Submitted Successfully!</h3>
-        <div id="successDetails"></div>
-        <button class="btn-red" onclick="showSection('track')">Track Your Application</button>
-        <button class="btn-outline" onclick="resetForm()">Submit Another Application</button>
-      </div>
-
-      <!-- THE FORM -->
-      <form id="reissueForm" class="reissue-form" novalidate>
-
-        <!-- Student Details -->
         <fieldset>
-          <legend>Student Details</legend>
+          <legend>Student Personal Details</legend>
 
           <div class="form-group">
-            <label for="rollNumber">Roll Number <span class="required">*</span></label>
-            <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g. 12306802" maxlength="20" />
-            <span class="error-msg" id="rollNumberError"></span>
+            <label for="rollNumber">Registration / Roll Number <span class="required">*</span></label>
+            <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g. 12306802">
           </div>
 
           <div class="form-group">
             <label for="fullName">Full Name <span class="required">*</span></label>
-            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" maxlength="100" />
-            <span class="error-msg" id="fullNameError"></span>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name">
           </div>
 
           <div class="form-group">
-            <label for="branch">Branch / Programme <span class="required">*</span></label>
+            <label for="branch">Programme / Branch <span class="required">*</span></label>
             <select id="branch" name="branch">
-              <option value="">-- Select Branch --</option>
-              <option value="B.Tech - Computer Science">B.Tech - Computer Science</option>
-              <option value="B.Tech - Mechanical Engineering">B.Tech - Mechanical Engineering</option>
-              <option value="B.Tech - Civil Engineering">B.Tech - Civil Engineering</option>
-              <option value="B.Tech - Electronics and Communication">B.Tech - Electronics and Communication</option>
-              <option value="BCA">BCA</option>
-              <option value="BBA">BBA</option>
-              <option value="MBA">MBA</option>
-              <option value="MCA">MCA</option>
-              <option value="B.Com">B.Com</option>
-              <option value="B.Sc">B.Sc</option>
+              <option value="">-- Select Your Branch --</option>
+              <option value="B.Tech Computer Science and Engineering">B.Tech Computer Science and Engineering</option>
+              <option value="B.Tech Mechanical Engineering">B.Tech Mechanical Engineering</option>
+              <option value="B.Tech Civil Engineering">B.Tech Civil Engineering</option>
+              <option value="B.Tech Electronics and Communication">B.Tech Electronics and Communication</option>
+              <option value="Bachelor of Computer Applications (BCA)">Bachelor of Computer Applications (BCA)</option>
+              <option value="Master of Computer Applications (MCA)">Master of Computer Applications (MCA)</option>
+              <option value="Bachelor of Business Administration (BBA)">Bachelor of Business Administration (BBA)</option>
+              <option value="Master of Business Administration (MBA)">Master of Business Administration (MBA)</option>
+              <option value="Bachelor of Science (B.Sc)">Bachelor of Science (B.Sc)</option>
               <option value="Other">Other</option>
             </select>
-            <span class="error-msg" id="branchError"></span>
           </div>
 
           <div class="form-group">
@@ -153,159 +116,175 @@
               <option value="AB+">AB+</option>
               <option value="AB-">AB-</option>
             </select>
-            <span class="error-msg" id="bloodGroupError"></span>
           </div>
+
+          <div class="form-group">
+            <label for="contactNumber">Contact Mobile Number <span class="required">*</span></label>
+            <input type="text" id="contactNumber" name="contactNumber" placeholder="e.g. 9876543210">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Reason &amp; Document Declaration</legend>
 
           <div class="form-group">
             <label for="reason">Reason for Reissue <span class="required">*</span></label>
-            <select id="reason" name="reason" onchange="updateChecklist()">
+            <select id="reason" name="reason">
               <option value="">-- Select Reason --</option>
-              <option value="Lost">Lost</option>
-              <option value="Damaged">Damaged</option>
-              <option value="Defaced">Defaced</option>
+              <option value="Lost">Lost ID Card</option>
+              <option value="Damaged">Damaged ID Card</option>
+              <option value="Defaced">Defaced / Faded Card</option>
             </select>
-            <span class="error-msg" id="reasonError"></span>
           </div>
 
-        </fieldset>
+          <div class="form-group">
+            <label for="remarks">Brief Description / Remarks</label>
+            <textarea id="remarks" name="remarks" rows="3" placeholder="Briefly mention how the card was lost or damaged..."></textarea>
+          </div>
 
-        <!-- Document Checklist -->
-        <fieldset id="checklistFieldset" style="display:none;">
-          <legend>Document Checklist</legend>
-          <p class="checklist-note">Please confirm that you have the following documents ready for submission at the office:</p>
-
-          <div class="checklist-item" id="checklistPolice" style="display:none;">
-            <label class="checkbox-label">
-              <input type="checkbox" id="chkPolice" />
-              Police Lost Report Acknowledgment <span class="required">*</span>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="docCheck" name="docCheck">
+            <label for="docCheck">
+              I declare that the information provided is correct and I will submit the required supporting document (Police Report or Old Card) at the counter. <span class="required">*</span>
             </label>
           </div>
-
-          <div class="checklist-item" id="checklistOldCard" style="display:none;">
-            <label class="checkbox-label">
-              <input type="checkbox" id="chkOldCard" />
-              Old Damaged / Defaced Card Submission <span class="required">*</span>
-            </label>
-          </div>
-
-          <span class="error-msg" id="checklistError"></span>
         </fieldset>
 
-        <!-- Fee Calculator -->
         <fieldset>
-          <legend>Processing Option and Fee</legend>
+          <legend>Processing Option &amp; Fee Details</legend>
 
-          <div class="form-group">
-            <label>
-              <input type="radio" name="processingType" value="Standard" checked onchange="updateFee()" />
-              Standard Reissue &#8212; &#8377;200 (7 to 10 working days)
+          <div class="radio-options">
+            <label class="radio-label">
+              <input type="radio" name="processingType" value="Standard" checked onchange="updateFee()">
+              Standard Reissue (7 to 10 working days) &mdash; &#8377;200
+            </label>
+            <br>
+            <label class="radio-label">
+              <input type="radio" name="processingType" value="Urgent" onchange="updateFee()">
+              Urgent Processing (24 to 48 hours) &mdash; &#8377;500
             </label>
           </div>
-          <div class="form-group">
-            <label>
-              <input type="radio" name="processingType" value="Urgent" onchange="updateFee()" />
-              Urgent 24-Hour Processing &#8212; &#8377;500
-            </label>
-          </div>
 
-          <!-- Fee summary -->
-          <div class="fee-summary" id="feeSummary">
-            <table class="fee-table">
-              <tr>
-                <td>Processing Type</td>
-                <td id="feeType">Standard Reissue</td>
-              </tr>
-              <tr>
-                <td>Processing Fee</td>
-                <td id="feeAmount">&#8377;200</td>
-              </tr>
-              <tr class="fee-total">
-                <td><strong>Total Amount Payable</strong></td>
-                <td id="feeTotal"><strong>&#8377;200</strong></td>
-              </tr>
-            </table>
-          </div>
+          <table class="fee-display-table">
+            <tr>
+              <td>Selected Processing Mode:</td>
+              <td><strong id="dispType">Standard Reissue</strong></td>
+            </tr>
+            <tr>
+              <td>Total Amount Payable:</td>
+              <td><strong id="dispFee">&#8377;200</strong></td>
+            </tr>
+          </table>
         </fieldset>
 
-        <!-- Submit button -->
-        <div class="form-submit">
-          <button type="submit" class="btn-red btn-large" id="submitBtn">Submit Application</button>
+        <div class="button-group">
+          <button type="submit" class="btn btn-submit">Submit Application</button>
+          <button type="reset" class="btn btn-reset" onclick="resetReceipt()">Reset Form</button>
         </div>
 
       </form>
-
     </section>
 
-    <!-- ========== SECTION: TRACK APPLICATION ========== -->
-    <section id="track" class="section">
-
-      <h2 class="section-title">Track Your Application</h2>
-
-      <!-- No application notice -->
-      <div id="noApplicationNotice" class="info-box">
-        <p>&#8505; No application found. Please <a href="#apply" onclick="showSection('apply')">apply for reissue</a> first.</p>
+    <section id="receiptSection" class="card receipt-card" style="display: none;">
+      <div class="receipt-header">
+        <h2>&#10004; Application Submitted Successfully!</h2>
+        <p>Please keep a record of your Application ID. Present this receipt along with your supporting documents at Block 30.</p>
       </div>
 
-      <!-- Tracking content (shown after an application is submitted) -->
-      <div id="trackingContent" style="display:none;">
+      <table class="receipt-table">
+        <tr>
+          <th>Application ID</th>
+          <td><strong id="receiptAppId" class="highlight-text"></strong></td>
+        </tr>
+        <tr>
+          <th>Student Name</th>
+          <td id="receiptName"></td>
+        </tr>
+        <tr>
+          <th>Roll Number</th>
+          <td id="receiptRoll"></td>
+        </tr>
+        <tr>
+          <th>Programme / Branch</th>
+          <td id="receiptBranch"></td>
+        </tr>
+        <tr>
+          <th>Reason for Reissue</th>
+          <td id="receiptReason"></td>
+        </tr>
+        <tr>
+          <th>Processing Mode</th>
+          <td id="receiptType"></td>
+        </tr>
+        <tr>
+          <th>Total Fee</th>
+          <td><strong id="receiptFee"></strong></td>
+        </tr>
+        <tr>
+          <th>Application Status</th>
+          <td><span class="status-badge">Submitted (Pending Verification)</span></td>
+        </tr>
+      </table>
 
-        <div class="tracking-header">
-          <p><strong>Application ID:</strong> <span id="trackAppId" class="highlight-red"></span></p>
-          <p><strong>Applicant Name:</strong> <span id="trackName"></span></p>
-          <p><strong>Roll Number:</strong> <span id="trackRoll"></span></p>
-          <p><strong>Reason:</strong> <span id="trackReason"></span></p>
-          <p><strong>Processing Type:</strong> <span id="trackProcessing"></span></p>
-          <p><strong>Total Fee:</strong> <span id="trackFee"></span></p>
-        </div>
-
-        <!-- Status Timeline -->
-        <h3 class="timeline-heading">Application Status Timeline</h3>
-        <div class="timeline" id="statusTimeline">
-          <div class="timeline-step" id="step-0">
-            <div class="step-circle">1</div>
-            <div class="step-label">Submitted</div>
-          </div>
-          <div class="timeline-connector" id="conn-0"></div>
-          <div class="timeline-step" id="step-1">
-            <div class="step-circle">2</div>
-            <div class="step-label">Payment Verified</div>
-          </div>
-          <div class="timeline-connector" id="conn-1"></div>
-          <div class="timeline-step" id="step-2">
-            <div class="step-circle">3</div>
-            <div class="step-label">Printing</div>
-          </div>
-          <div class="timeline-connector" id="conn-2"></div>
-          <div class="timeline-step" id="step-3">
-            <div class="step-circle">4</div>
-            <div class="step-label">Ready for Collection</div>
-          </div>
-        </div>
-
-        <!-- Demo status changer -->
-        <div class="status-changer">
-          <label for="statusSelect"><strong>Change Status to See Timeline Update</strong></label>
-          <br />
-          <select id="statusSelect" onchange="updateStatus()">
-            <option value="0">Submitted</option>
-            <option value="1">Payment Verified</option>
-            <option value="2">Printing</option>
-            <option value="3">Ready for Collection</option>
-          </select>
-        </div>
-
+      <div class="receipt-actions">
+        <button type="button" class="btn btn-print" onclick="window.print()">Print Receipt</button>
       </div>
-
     </section>
 
+    <section id="fee-structure" class="card">
+      <h2>Fee Structure &amp; Processing Details</h2>
+      <p>The processing fee covers administrative costs and smart-card printing. Please review the details below:</p>
 
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Processing Time</th>
+            <th>Fee (INR)</th>
+            <th>Mandatory Document</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Standard Reissue (Lost)</td>
+            <td>7 &ndash; 10 Working Days</td>
+            <td>&#8377;200</td>
+            <td>Police DDR / Lost Report Copy</td>
+          </tr>
+          <tr>
+            <td>Standard Reissue (Damaged / Defaced)</td>
+            <td>7 &ndash; 10 Working Days</td>
+            <td>&#8377;200</td>
+            <td>Original Old Damaged Card</td>
+          </tr>
+          <tr>
+            <td>Urgent 24-Hour Processing</td>
+            <td>24 &ndash; 48 Hours</td>
+            <td>&#8377;500</td>
+            <td>Respective Supporting Document</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>Contact &amp; Helpdesk</h2>
+      <p>For any queries or assistance regarding ID card reissue, please visit or contact the student helpdesk:</p>
+
+      <div class="contact-details">
+        <p><strong>Office:</strong> Division of Student Welfare (DSW), Counter 4</p>
+        <p><strong>Location:</strong> Block 30, Ground Floor, Lovely Professional University, Phagwara, Punjab</p>
+        <p><strong>Office Hours:</strong> 9:00 AM &ndash; 5:00 PM (Monday to Friday)</p>
+        <p><strong>Email Support:</strong> idcard-helpdesk@lpu.co.in</p>
+        <p><strong>Phone Support:</strong> +91 1824 517000</p>
+      </div>
+    </section>
 
   </main>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
-    <p>Lovely Professional University &mdash; Student ID Card Reissue Portal</p>
-    <p class="footer-note">Student Project | Frontend Demonstration</p>
+    <p>&copy; 2026 Lovely Professional University. All Rights Reserved.</p>
+    <p class="footer-small">Department of Student Welfare &bull; CSE326 Internet Programming Project</p>
   </footer>
 
   <script src="script.js"></script>
