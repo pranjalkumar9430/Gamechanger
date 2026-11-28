@@ -107,3 +107,54 @@ function resetReceipt() {
   document.getElementById("dispType").innerText = "Standard Reissue";
   document.getElementById("dispFee").innerHTML = "&#8377;200";
 }
+
+var currentStatus = 0;
+
+function renderPipeline(status) {
+  var stages = ["Submitted", "Payment Verified", "Printing", "Ready for Collection"];
+
+  for (var i = 0; i < stages.length; i++) {
+    var statusCell = document.getElementById("step-status-" + i);
+    var row = document.getElementById("step-row-" + i);
+
+    if (i < status) {
+      statusCell.innerText = "Done";
+      row.style.backgroundColor = "lightgreen";
+      statusCell.style.color = "darkgreen";
+    } else if (i === status) {
+      statusCell.innerText = "In Progress";
+      row.style.backgroundColor = "lightyellow";
+      statusCell.style.color = "darkred";
+    } else {
+      statusCell.innerText = "Pending";
+      row.style.backgroundColor = "white";
+      statusCell.style.color = "gray";
+    }
+  }
+
+  var statusNames = ["Submitted", "Payment Verified", "Printing", "Ready for Collection"];
+  document.getElementById("trackStatusText").innerText = statusNames[status];
+}
+
+function trackStatus() {
+  var input = document.getElementById("trackInput").value.trim();
+
+  if (input === "") {
+    alert("Please enter your Application ID.");
+    document.getElementById("trackInput").focus();
+    return;
+  }
+
+  document.getElementById("trackAppId").innerText = input;
+  document.getElementById("statusSelect").value = currentStatus;
+  renderPipeline(currentStatus);
+
+  var result = document.getElementById("trackResult");
+  result.style.display = "block";
+  result.scrollIntoView();
+}
+
+function changeStatus() {
+  currentStatus = parseInt(document.getElementById("statusSelect").value);
+  renderPipeline(currentStatus);
+}

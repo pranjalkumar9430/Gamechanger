@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LPU Student ID Card Reissue Portal</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <header class="site-header">
@@ -24,6 +26,7 @@
     <ul class="nav-links">
       <li><a href="#instructions">Instructions</a></li>
       <li><a href="#apply">Apply Reissue</a></li>
+      <li><a href="#track-status">Track Status</a></li>
       <li><a href="#fee-structure">Fee Structure</a></li>
       <li><a href="#contact">Contact Support</a></li>
     </ul>
@@ -34,7 +37,8 @@
     <section id="instructions" class="card">
       <h2>General Instructions &amp; Guidelines</h2>
       <p class="intro-text">
-        Welcome to the <strong>LPU Student ID Card Reissue Portal</strong>. This portal is for students of Lovely Professional University who need a replacement ID Card due to loss, damage, or defacement.
+        Welcome to the <strong>LPU Student ID Card Reissue Portal</strong>. This portal is for students of Lovely
+        Professional University who need a replacement ID Card due to loss, damage, or defacement.
       </p>
 
       <div class="info-grid">
@@ -69,7 +73,8 @@
 
     <section id="apply" class="card">
       <h2>Apply for ID Card Reissue</h2>
-      <p class="form-instruction">Please fill in all the required details carefully. Fields marked with <span class="required">*</span> are mandatory.</p>
+      <p class="form-instruction">Please fill in all the required details carefully. Fields marked with <span
+          class="required">*</span> are mandatory.</p>
 
       <form id="reissueForm" onsubmit="return handleFormSubmit(event)">
 
@@ -96,7 +101,8 @@
               <option value="B.Tech Electronics and Communication">B.Tech Electronics and Communication</option>
               <option value="Bachelor of Computer Applications (BCA)">Bachelor of Computer Applications (BCA)</option>
               <option value="Master of Computer Applications (MCA)">Master of Computer Applications (MCA)</option>
-              <option value="Bachelor of Business Administration (BBA)">Bachelor of Business Administration (BBA)</option>
+              <option value="Bachelor of Business Administration (BBA)">Bachelor of Business Administration (BBA)
+              </option>
               <option value="Master of Business Administration (MBA)">Master of Business Administration (MBA)</option>
               <option value="Bachelor of Science (B.Sc)">Bachelor of Science (B.Sc)</option>
               <option value="Other">Other</option>
@@ -139,13 +145,15 @@
 
           <div class="form-group">
             <label for="remarks">Brief Description / Remarks</label>
-            <textarea id="remarks" name="remarks" rows="3" placeholder="Briefly mention how the card was lost or damaged..."></textarea>
+            <textarea id="remarks" name="remarks" rows="3"
+              placeholder="Briefly mention how the card was lost or damaged..."></textarea>
           </div>
 
           <div class="form-group checkbox-group">
             <input type="checkbox" id="docCheck" name="docCheck">
             <label for="docCheck">
-              I declare that the information provided is correct and I will submit the required supporting document (Police Report or Old Card) at the counter. <span class="required">*</span>
+              I declare that the information provided is correct and I will submit the required supporting document
+              (Police Report or Old Card) at the counter. <span class="required">*</span>
             </label>
           </div>
         </fieldset>
@@ -188,7 +196,8 @@
     <section id="receiptSection" class="card receipt-card" style="display: none;">
       <div class="receipt-header">
         <h2>&#10004; Application Submitted Successfully!</h2>
-        <p>Please keep a record of your Application ID. Present this receipt along with your supporting documents at Block 30.</p>
+        <p>Please keep a record of your Application ID. Present this receipt along with your supporting documents at
+          Block 30.</p>
       </div>
 
       <table class="receipt-table">
@@ -228,6 +237,75 @@
 
       <div class="receipt-actions">
         <button type="button" class="btn btn-print" onclick="window.print()">Print Receipt</button>
+      </div>
+    </section>
+
+    <section id="track-status" class="card">
+      <h2>Application Status Tracker</h2>
+      <p class="form-instruction">Enter your Application ID to check the current status of your ID card reissue.</p>
+
+      <div class="form-group">
+        <label for="trackInput">Application ID</label>
+        <input type="text" id="trackInput" placeholder="e.g. LPU-IDR-4521">
+      </div>
+      <div class="button-group" style="text-align: left; margin-top: 0; margin-bottom: 20px;">
+        <button type="button" class="btn btn-submit" onclick="trackStatus()">Check Status</button>
+      </div>
+
+      <div id="trackResult" style="display: none;">
+        <table class="receipt-table" style="margin-bottom: 20px;">
+          <tr>
+            <th>Application ID</th>
+            <td id="trackAppId" class="highlight-text"></td>
+          </tr>
+          <tr>
+            <th>Current Status</th>
+            <td id="trackStatusText"></td>
+          </tr>
+        </table>
+
+        <h3 style="margin-bottom: 15px; color: black;">Status Pipeline</h3>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Stage</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="step-row-0">
+              <td>1</td>
+              <td>Submitted</td>
+              <td id="step-status-0"></td>
+            </tr>
+            <tr id="step-row-1">
+              <td>2</td>
+              <td>Payment Verified</td>
+              <td id="step-status-1"></td>
+            </tr>
+            <tr id="step-row-2">
+              <td>3</td>
+              <td>Printing</td>
+              <td id="step-status-2"></td>
+            </tr>
+            <tr id="step-row-3">
+              <td>4</td>
+              <td>Ready for Collection</td>
+              <td id="step-status-3"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top: 15px;">
+          <label for="statusSelect"><strong>Demo: Change Status to See Pipeline Update</strong></label><br>
+          <select id="statusSelect" onchange="changeStatus()" style="margin-top: 8px; width: auto; padding: 8px 12px;">
+            <option value="0">Submitted</option>
+            <option value="1">Payment Verified</option>
+            <option value="2">Printing</option>
+            <option value="3">Ready for Collection</option>
+          </select>
+        </div>
       </div>
     </section>
 
@@ -287,6 +365,7 @@
     <p class="footer-small">CSE326 Internet Programming Project</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
+
 </html>
